@@ -16,8 +16,8 @@ public class CollectController {
     @Autowired
     CollectService cs;
     @GetMapping("/view")
-    public Result view(@RequestParam int userid) {
-        Result result = cs.findall(userid);
+    public Result view(@RequestParam String username) {
+        Result result = cs.findall(username);
         if (result.getCode() == 1){
             return result;
         }else {
@@ -25,14 +25,14 @@ public class CollectController {
         }
     }
     @GetMapping("/add")
-    public Result add(@RequestParam int userid, @RequestParam int quizid) {
-        Result result = cs.add(userid,quizid);
+    public Result add(@RequestParam String username, @RequestParam int quizid) {
+        Result result = cs.add(username,quizid);
         return result;
 
     }
     @GetMapping("/delete")
-    public Result delete(@RequestParam int userid, @RequestParam int quizid) {
-        Result result = cs.delete(userid,quizid);
+    public Result delete(@RequestParam String username, @RequestParam int quizid) {
+        Result result = cs.delete(username,quizid);
         return result;
 
     }

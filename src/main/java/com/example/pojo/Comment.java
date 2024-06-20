@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Collect {
+public class Comment {
     private int id;
-    private int username;
+    private String username;
     private int quizid;
+    private String comment;
+    private int goal;
 
 }

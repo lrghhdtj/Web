@@ -13,19 +13,16 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CollectMapper {
-    /**
-     * @param userid
-     * @return
-     */
-    @Select("select quizid from web.collection where userid= #{userid}")
-    List<Integer>getby(int userid);
 
-    @Select("select * from web.collection where userid = #{userid} and quizid = #{quizid}")
-    Collect get(int userid, int quizid);
+    @Select("select quizid from web.collection where username= #{username}")
+    List<Integer>getby(String username);
 
-    @Insert("insert into web.collection (userid,quizid) values (#{userid},#{quizid})")
-    void add(int userid, Integer quizid);
+    @Select("select * from web.collection where userid = #{username} and quizid = #{quizid}")
+    Collect get(String username, int quizid);
 
-    @Delete("DELETE from web.collection where userid = #{userid} and quizid = #{quizid}")
-    void delete(int userid, int quizid);
+    @Insert("insert into web.collection (username,quizid) values (#{username},#{quizid})")
+    void add(String username, int quizid);
+
+    @Delete("delete from web.collection where username = #{username} and quizid = #{quizid}")
+    void delete(String username, int quizid);
 }

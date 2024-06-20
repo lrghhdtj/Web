@@ -46,7 +46,7 @@ public class TopicController {
         PageBean pageBean = quizService.page(page, pageSize);
         return Result.success(pageBean);
     }
-//检查答案暂时不用
+//检查答案未完善
     @PostMapping("/check")
     public Result check(@RequestParam int quizid, @RequestParam String answer) {
         Quiz quiz = (Quiz) quizService.find(quizid).getData();
@@ -60,5 +60,6 @@ public class TopicController {
             return Result.error("");
         }
     }
+
 
 }

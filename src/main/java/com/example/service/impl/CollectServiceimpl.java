@@ -21,8 +21,8 @@ public class CollectServiceimpl implements CollectService {
     @Autowired
     QuizMapper quizMapper;
     @Override
-    public Result findall(int userid) {
-        List<Integer> clist = collectMapper.getby(userid);
+    public Result findall(String username) {
+        List<Integer> clist = collectMapper.getby(username);
         List<Quiz> list = new ArrayList<>();
         if (clist.size() > 0) {
             for (int i = 0; i < clist.size(); i++) {
@@ -35,23 +35,23 @@ public class CollectServiceimpl implements CollectService {
     }
 
     @Override
-    public Result add(int userid, int quizid) {
-        Collect collect =  collectMapper.get(userid,quizid);
+    public Result add(String username, int quizid) {
+        Collect collect =  collectMapper.get(username,quizid);
         if (collect != null){
             return Result.error("Quiz Exist");
         }else {
-            collectMapper.add(userid,quizid);
+            collectMapper.add(username,quizid);
             return Result.success("加入成功！");
         }
     }
 
     @Override
-    public Result delete(int userid, int quizid) {
-        Collect collect = collectMapper.get(userid,quizid);
+    public Result delete(String username, int quizid) {
+        Collect collect = collectMapper.get(username,quizid);
         if (collect == null){
             return Result.error("Collection No Exist");
         }else {
-            collectMapper.delete(userid,quizid);
+            collectMapper.delete(username,quizid);
             return Result.success("删除成功！");
         }
     }
