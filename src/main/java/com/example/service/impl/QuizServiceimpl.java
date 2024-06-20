@@ -31,7 +31,7 @@ public class QuizServiceimpl implements QuizService {
         if (!list.isEmpty()){
             return Result.success(list);
         }else {
-            return Result.error("");
+            return Result.error("No Found!");
         }
     }
     @Override

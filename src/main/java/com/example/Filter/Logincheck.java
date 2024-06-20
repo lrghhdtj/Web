@@ -9,9 +9,11 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+@Component
 @Slf4j
 @WebFilter(filterName = "checklogin", urlPatterns = "/*")
 public class Logincheck implements Filter {

@@ -32,8 +32,5 @@ public class UserController {
             return Result.error("用户已存在！");
         }
     }
-    @RequestMapping("/")
-    public void get(){
 
-    }
 }

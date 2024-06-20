@@ -16,12 +16,12 @@ public class CollectController {
     @Autowired
     CollectService cs;
     @GetMapping("/view")
-    public Result view(@RequestParam int userid, @RequestParam int quizid) {
+    public Result view(@RequestParam int userid) {
         Result result = cs.findall(userid);
         if (result.getCode() == 1){
             return result;
         }else {
-            return Result.error("");
+            return Result.error("没有收藏!");
         }
     }
     @GetMapping("/add")

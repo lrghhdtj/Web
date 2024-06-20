@@ -26,7 +26,7 @@ public class TopicController {
             return Result.error("error");
         }
     }
-
+//找题
     @GetMapping(value = {"/find","/do"})
     public Result find(@RequestParam int id) {
         Result result = quizService.find(id);
@@ -36,7 +36,7 @@ public class TopicController {
             return Result.error("没找到题目！");
         }
     }
-
+//分页查询
     @GetMapping("/page")
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize) {
@@ -46,7 +46,7 @@ public class TopicController {
         PageBean pageBean = quizService.page(page, pageSize);
         return Result.success(pageBean);
     }
-
+//检查答案暂时不用
     @PostMapping("/check")
     public Result check(@RequestParam int quizid, @RequestParam String answer) {
         Quiz quiz = (Quiz) quizService.find(quizid).getData();
