@@ -14,6 +14,13 @@ create table quiz(
 );
 create table user(
     id int primary key auto_increment,
-    userid varchar(20) not null ,
+    username varchar(20) not null ,
     password varchar(20) not null 
 )
+create table commemt(
+    id int primary key auto_increment,
+    username varchar(20) not null ,
+    quizid int not null ,
+    comment text not null ,
+    goal int not null 
+              )
