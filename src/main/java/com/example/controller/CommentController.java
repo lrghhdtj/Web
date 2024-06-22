@@ -27,10 +27,6 @@ public class CommentController {
         Result result = commentService.deletecomment(username,quizid);
         return result;
     }
-    @PostMapping("/change")
-    public Result changeComment(@RequestParam String username,@RequestParam int quizid, @RequestParam String comment ,@RequestParam int goal) {
-        Result result = commentService.changecomment(username,quizid,comment,goal);
-        return result;
-    }
+
 
 }

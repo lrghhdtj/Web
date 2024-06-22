@@ -9,5 +9,5 @@ public interface CommentService {
 
     Result deletecomment(String username, int quizid);
 
-    Result changecomment(String username, int quizid, String comment, int goal);
+
 }

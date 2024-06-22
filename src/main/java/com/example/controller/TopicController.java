@@ -46,19 +46,13 @@ public class TopicController {
         PageBean pageBean = quizService.page(page, pageSize);
         return Result.success(pageBean);
     }
-//检查答案未完善
+//检查答案
     @PostMapping("/check")
     public Result check(@RequestParam int quizid, @RequestParam String answer) {
         Quiz quiz = (Quiz) quizService.find(quizid).getData();
         Check check = new Check();
-        if("r".equals(quiz.getStyle())){
-            check.reading_check(answer, quiz.getSolution());
-        }
-        if (quiz.getSolution().equals(answer)){
-            return Result.success("");
-        }else {
-            return Result.error("");
-        }
+        return  check.check(answer, quiz.getSolution());
+
     }
 
 

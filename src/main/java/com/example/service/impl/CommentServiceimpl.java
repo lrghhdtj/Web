@@ -7,6 +7,8 @@ import com.example.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +29,8 @@ public class CommentServiceimpl implements CommentService {
     public Result addcomment(String username, int quizid, String comment, int goal) {
         Comment c = commentMapper.get(username,quizid);
         if (c == null){
-            commentMapper.addcomment(username,quizid,comment,goal);
+            Date createtime = new Date();
+            commentMapper.addcomment(username,quizid,comment,goal,new Timestamp(createtime.getTime()));
             return Result.success("评论成功！");
         }else {
             return Result.error("已评论！");
@@ -45,14 +48,5 @@ public class CommentServiceimpl implements CommentService {
         }
     }
 
-    @Override
-    public Result changecomment(String username, int quizid, String comment, int goal) {
-        Comment c = commentMapper.get(username,quizid);
-        if (c != null){
-            commentMapper.changecomment(username, quizid, comment, goal);
-            return Result.success("已修改评论！");
-        }else {
-            return Result.error("未找到评论！");
-        }
-    }
+
 }
