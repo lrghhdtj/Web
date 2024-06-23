@@ -1,6 +1,6 @@
 create table collection(
     id int primary key auto_increment,
-    userid int not null ,
+    username varchar(20) not null ,
     quizid int not null
 
 );
@@ -22,5 +22,6 @@ create table commemt(
     username varchar(20) not null ,
     quizid int not null ,
     comment text not null ,
-    goal int not null 
+    goal int not null ,
+    createtime datetime not null
               )
