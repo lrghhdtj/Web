@@ -6,6 +6,7 @@
 
 create table quiz(
     id int primary key auto_increment,
+    title varchar(20),
     descrition varchar(35),
     data text,
     question text,
