@@ -25,11 +25,12 @@ create table collection(
 
 create table commemt(
     id int primary key auto_increment,
-    userid int not null ,
-    quizid int not null ,
+    username varchar(20) not null ,
     comment text not null ,
     goal int not null ,
     createtime datetime not null,
+    userid int not null ,
+    quizid int not null ,
 	CONSTRAINT `fk_comment_userid`  FOREIGN KEY(userid) REFERENCES user(id),
     CONSTRAINT `fk_comment_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 	);
