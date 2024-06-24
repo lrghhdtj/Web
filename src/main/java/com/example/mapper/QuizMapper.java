@@ -23,10 +23,10 @@ public interface QuizMapper {
     List<Quiz> get();
 
     @Select("select count(*) from web.quiz")
-    public Long count();
+    Long count();
 
     @Select("select * from web.quiz limit #{start},#{pageSize}")
-    public List<Quiz> page(Integer start,Integer pageSize);
+    List<Quiz> page(Integer start,Integer pageSize);
 
 }
 

@@ -17,24 +17,38 @@ public class CollectController {
     CollectService cs;
     @GetMapping("/view")
     public Result view(@RequestParam String username) {
-        Result result = cs.findall(username);
-        if (result.getCode() == 1){
-            return result;
-        }else {
-            return Result.error("没有收藏!");
+        Result result = new Result();
+        try {
+            result = cs.findall(username);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
         }
+        return result;
     }
     @GetMapping("/add")
     public Result add(@RequestParam String username, @RequestParam int quizid) {
-        Result result = cs.add(username,quizid);
+        Result result = new Result();
+        try {
+             result = cs.add(username,quizid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
         return result;
-
     }
     @GetMapping("/delete")
     public Result delete(@RequestParam String username, @RequestParam int quizid) {
-        Result result = cs.delete(username,quizid);
+        Result result = new Result();
+        try {
+            result = cs.delete(username,quizid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
         return result;
+    }
 
     }
 
-}
+

@@ -12,9 +12,10 @@ import java.util.Date;
 public class Comment {
     private int id;
     private String username;
-    private int quizid;
     private String comment;
     private int goal;
     private Date createtime;
+    private int userid;
+    private int quizid;
 
 }

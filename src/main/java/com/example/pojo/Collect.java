@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Collect {
     private int id;
-    private int username;
+    private int userid;
     private int quizid;
 
 }

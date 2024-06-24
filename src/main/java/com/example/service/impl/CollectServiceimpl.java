@@ -30,7 +30,7 @@ public class CollectServiceimpl implements CollectService {
             }
             return Result.success(list);
         }else {
-            return Result.error("No Found!");
+            return Result.error("没有收藏！");
         }
     }
 
@@ -38,7 +38,7 @@ public class CollectServiceimpl implements CollectService {
     public Result add(String username, int quizid) {
         Collect collect =  collectMapper.get(username,quizid);
         if (collect != null){
-            return Result.error("Quiz Exist");
+            return Result.error("已收藏！");
         }else {
             collectMapper.add(username,quizid);
             return Result.success("加入成功！");
@@ -49,10 +49,11 @@ public class CollectServiceimpl implements CollectService {
     public Result delete(String username, int quizid) {
         Collect collect = collectMapper.get(username,quizid);
         if (collect == null){
-            return Result.error("Collection No Exist");
+            return Result.error("收藏不存在！");
         }else {
             collectMapper.delete(username,quizid);
             return Result.success("删除成功！");
         }
     }
+
 }

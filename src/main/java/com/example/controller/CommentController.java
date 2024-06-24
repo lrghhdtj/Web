@@ -14,17 +14,35 @@ public class CommentController {
     private CommentService commentService;
     @GetMapping("/get")
     public Result getComment(@RequestParam int quizid) {
-        Result result = commentService.getcomment(quizid);
+        Result result;
+        try {
+            result = commentService.getcomment(quizid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
         return result;
     }
     @PostMapping("/add")
     public Result addComment(@RequestParam String username,@RequestParam int quizid, @RequestParam String comment ,@RequestParam int goal) {
-        Result result = commentService.addcomment(username,quizid,comment,goal);
+        Result result;
+        try {
+            result = commentService.addcomment(username,quizid,comment,goal);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
         return result;
     }
     @PostMapping("/delete")
     public Result deleteComment(@RequestParam String username,@RequestParam int quizid) {
-        Result result = commentService.deletecomment(username,quizid);
+        Result result;
+        try {
+            result = commentService.deletecomment(username,quizid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
         return result;
     }
 

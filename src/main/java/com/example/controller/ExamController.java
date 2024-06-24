@@ -21,24 +21,30 @@ public class ExamController {
     @Autowired
     QuizService quizService;
     @PostMapping("/test")
-    public Result doexam(){
-        List<Quiz> list = ((List<Quiz>) quizService.get().getData());
+    public Result doexam() {
+        List<Quiz> list;
+        try {
+            list = ((List<Quiz>) quizService.get().getData());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error(e.getMessage());
+        }
         List<Quiz> r = new ArrayList<>();
         List<Quiz> f = new ArrayList<>();
         List<Quiz> t = new ArrayList<>();
         List<Quiz> w = new ArrayList<>();
         List<Quiz> paper = new ArrayList<>();
         for (Quiz quiz : list) {
-            if (quiz.getStyle().equals("r")){
+            if (quiz.getStyle().equals("r")) {
                 r.add(quiz);
             }
-            if (quiz.getStyle().equals("f")){
+            if (quiz.getStyle().equals("f")) {
                 f.add(quiz);
             }
-            if (quiz.getStyle().equals("t")){
+            if (quiz.getStyle().equals("t")) {
                 t.add(quiz);
             }
-            if (quiz.getStyle().equals("w")){
+            if (quiz.getStyle().equals("w")) {
                 w.add(quiz);
             }
         }

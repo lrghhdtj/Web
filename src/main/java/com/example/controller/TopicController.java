@@ -19,23 +19,29 @@ public class TopicController {
 
     @RequestMapping("/")
     public Result get() {
-        Result result = quizService.get();
-        if (result.getCode() == 1){
-            return result;
-        }else {
-            return Result.error("error");
+        Result result;
+        try {
+            result = quizService.get();
+            //List<Quiz> list = (List<Quiz>) result.getData();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
         }
+        return result;
     }
 //找题
     @GetMapping(value = {"/find","/do"})
     public Result find(@RequestParam int id) {
-        Result result = quizService.find(id);
-        if (result.getCode() == 1) {
-            return Result.success();
-        } else {
-            return Result.error("没找到题目！");
+        Result result;
+        try {
+            result = quizService.find(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
         }
+        return result;
     }
+
 //分页查询
     @GetMapping("/page")
     public Result page(@RequestParam(defaultValue = "1") Integer page,

@@ -22,7 +22,7 @@ public class QuizServiceimpl implements QuizService {
         if (quiz != null){
             return Result.success(quiz);
         }else {
-            return Result.error("No Found!");
+            return Result.error("没有找到题目!");
         }
     }
     @Override
@@ -31,7 +31,7 @@ public class QuizServiceimpl implements QuizService {
         if (!list.isEmpty()){
             return Result.success(list);
         }else {
-            return Result.error("No Found!");
+            return Result.error("没有找到题目!");
         }
     }
     @Override

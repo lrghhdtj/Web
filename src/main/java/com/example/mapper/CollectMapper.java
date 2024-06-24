@@ -14,15 +14,15 @@ import java.util.List;
 @Mapper
 public interface CollectMapper {
 
-    @Select("select quizid from web.collection where username= #{username}")
+    @Select("select quizid from web.collection where userid =(select id from web.user where username = #{username})")
     List<Integer>getby(String username);
 
-    @Select("select * from web.collection where userid = #{username} and quizid = #{quizid}")
+    @Select("select * from web.collection where userid =(select id from web.user where username = #{username}) and quizid = #{quizid}")
     Collect get(String username, int quizid);
 
-    @Insert("insert into web.collection (username,quizid) values (#{username},#{quizid})")
+    @Insert("insert into web.collection (userid,quizid) values ((select id from web.user where username = #{username}),#{quizid})")
     void add(String username, int quizid);
 
-    @Delete("delete from web.collection where username = #{username} and quizid = #{quizid}")
+    @Delete("delete from web.collection where userid =(select userid from web.user where username = #{username}) and quizid = #{quizid}")
     void delete(String username, int quizid);
 }
