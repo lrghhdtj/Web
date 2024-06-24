@@ -25,9 +25,7 @@ public class TopicController {
         try {
             tmpList = new ArrayList<>();
             List<Quiz> list = (List<Quiz>) quizService.get().getData();
-            System.out.println(list.size());
             for (int i = list.size()-1; i >= 0; i--) {
-                System.out.println(list.get(i).getId());
                 tmp tmp = new tmp(list.get(i).getId(),list.get(i).getTitle(),list.get(i).getDescription());
                 tmpList.add(tmp);
             }
@@ -78,7 +76,6 @@ public class TopicController {
         Quiz quiz = (Quiz) quizService.find(quizid).getData();
         Check check = new Check();
         return  check.check(answer, quiz.getSolution());
-
     }
 
 
