@@ -8,6 +8,8 @@ import com.example.service.QuizService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -16,13 +18,38 @@ import java.util.List;
 public class TopicController {
     @Autowired
     QuizService quizService;
-
+    @RequestMapping("")
+    public Result home() {
+        class tmp{
+            private int id;
+            private String title;
+            private String description;
+            public tmp(int id, String title, String description) {
+                this.id = id;
+                this.title = title;
+                this.description = description;
+            }
+        }
+        Result result;
+        try {
+            result = quizService.get();
+            List<Quiz> list = (List<Quiz>) result.getData();
+            List<tmp> tmpList = new ArrayList<>();
+            for (int i = list.size()-1; i > 0; i--) {
+                tmp tmp = new tmp(list.get(i).getId(),list.get(i).getTitle(),list.get(i).getDescription());
+                tmpList.add(tmp);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
+        return result;
+    }
     @RequestMapping("/")
     public Result get() {
         Result result;
         try {
             result = quizService.get();
-            //List<Quiz> list = (List<Quiz>) result.getData();
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(String.valueOf(e));

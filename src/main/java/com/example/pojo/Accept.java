@@ -20,6 +20,8 @@ public class Accept {
     private String username;
     private String password;
     //题目
+    private String title;
+    private String description;
     private String data;
     private String question;
     private String solution;
