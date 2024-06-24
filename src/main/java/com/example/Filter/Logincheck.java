@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-//@Component
+@Component
 @Slf4j
 @WebFilter(filterName = "checklogin", urlPatterns = "/*")
 public class Logincheck implements Filter {

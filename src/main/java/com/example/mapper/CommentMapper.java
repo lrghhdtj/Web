@@ -13,7 +13,7 @@ public interface CommentMapper {
     @Select("select * from web.comment where quizid = #{quizid}")
     List<Comment> selectAll(int quizid);
 
-    @Insert("insert into web.comment (username,comment,goal,createtime,userid,quizid) values (#{username},#{somment},#{goal},#{createtime},(select id from web.user where username = #{username}),#{quizid})")
+    @Insert("insert into web.comment (username,comment,goal,createtime,userid,quizid) values (#{username},#{comment},#{goal},#{createtime},(select id from web.user where username = #{username}),#{quizid})")
     void addcomment(String username, int quizid, String comment, int goal, Date createtime);
 
     @Delete("delete from web.comment where userid = (select id from web.user where username = #{username}) and quizid = #{quizid}")

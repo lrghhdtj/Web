@@ -1,13 +1,14 @@
 package com.example.controller;
 
 import com.example.Utils.Result;
+import com.example.pojo.Accept;
+import com.example.pojo.Collect;
 import com.example.service.CollectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -26,22 +27,22 @@ public class CollectController {
         }
         return result;
     }
-    @GetMapping("/add")
-    public Result add(@RequestParam String username, @RequestParam int quizid) {
-        Result result = new Result();
+    @PostMapping("/add")
+    public Result add(@RequestBody Accept accept) {
+        Result result;
         try {
-             result = cs.add(username,quizid);
+             result = cs.add(accept.getUsername(), accept.getQuizid());
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(String.valueOf(e));
         }
         return result;
     }
-    @GetMapping("/delete")
-    public Result delete(@RequestParam String username, @RequestParam int quizid) {
-        Result result = new Result();
+    @PostMapping("/delete")
+    public Result delete(@RequestBody Accept accept) {
+        Result result;
         try {
-            result = cs.delete(username,quizid);
+            result = cs.delete(accept.getUsername(), accept.getQuizid());
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(String.valueOf(e));

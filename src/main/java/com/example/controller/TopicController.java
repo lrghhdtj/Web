@@ -53,7 +53,7 @@ public class TopicController {
         return Result.success(pageBean);
     }
 //检查答案
-    @PostMapping("/check")
+    @GetMapping("/check")
     public Result check(@RequestParam int quizid, @RequestParam String answer) {
         Quiz quiz = (Quiz) quizService.find(quizid).getData();
         Check check = new Check();
