@@ -20,22 +20,14 @@ public class TopicController {
     QuizService quizService;
     @RequestMapping("")
     public Result home() {
-        class tmp{
-            private int id;
-            private String title;
-            private String description;
-            public tmp(int id, String title, String description) {
-                this.id = id;
-                this.title = title;
-                this.description = description;
-            }
-        }
-        Result result;
+
+        List<tmp> tmpList;
         try {
-            result = quizService.get();
-            List<Quiz> list = (List<Quiz>) result.getData();
-            List<tmp> tmpList = new ArrayList<>();
-            for (int i = list.size()-1; i > 0; i--) {
+            tmpList = new ArrayList<>();
+            List<Quiz> list = (List<Quiz>) quizService.get().getData();
+            System.out.println(list.size());
+            for (int i = list.size()-1; i >= 0; i--) {
+                System.out.println(list.get(i).getId());
                 tmp tmp = new tmp(list.get(i).getId(),list.get(i).getTitle(),list.get(i).getDescription());
                 tmpList.add(tmp);
             }
@@ -43,8 +35,9 @@ public class TopicController {
             e.printStackTrace();
             return Result.error(String.valueOf(e));
         }
-        return result;
+        return Result.success(tmpList);
     }
+
     @RequestMapping("/")
     public Result get() {
         Result result;
@@ -89,4 +82,39 @@ public class TopicController {
     }
 
 
+}
+class tmp{
+    private int id;
+    private String title;
+    private String description;
+    public tmp(int id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+    public tmp() {
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
