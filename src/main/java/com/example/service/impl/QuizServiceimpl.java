@@ -17,8 +17,8 @@ public class QuizServiceimpl implements QuizService {
     @Autowired
     QuizMapper quizMapper;
     @Override
-    public Result find(int id) {
-        Quiz quiz = quizMapper.find(id);
+    public Result find(int quizid) {
+        Quiz quiz = quizMapper.find(quizid);
         if (quiz != null){
             return Result.success(quiz);
         }else {

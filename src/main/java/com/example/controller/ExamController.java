@@ -3,12 +3,10 @@ package com.example.controller;
 import com.example.Utils.Result;
 import com.example.pojo.Quiz;
 import com.example.service.QuizService;
+import com.example.service.UserLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,8 +19,10 @@ import java.util.Random;
 public class ExamController {
     @Autowired
     QuizService quizService;
+    @Autowired
+    UserLogService userLogService;
     @GetMapping("/test")
-    public Result doexam() {
+    public Result doexam(@RequestParam String username) {
         List<Quiz> list;
         try {
             list = ((List<Quiz>) quizService.get().getData());
@@ -57,8 +57,11 @@ public class ExamController {
             paper.add(r.get(i));
         }
         paper.add(f.get(1));
+        userLogService.add(username,f.get(1).getId());
         paper.add(t.get(1));
+        userLogService.add(username,t.get(1).getId());
         paper.add(w.get(1));
+        userLogService.add(username,w.get(1).getId());
         return Result.success(paper);
     }
 

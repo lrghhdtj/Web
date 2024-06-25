@@ -22,4 +22,6 @@ public interface UserMapper {
     void insertuser(String username, String password);
 @Update("update web.user set password = #{newpassword} where username = #{username}")
     void change(String username,String newpassword);
+@Select("select id from user where username = #{username}")
+    Integer getUserid(String username);
 }

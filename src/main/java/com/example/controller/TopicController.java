@@ -5,6 +5,10 @@ import com.example.Utils.Result;
 import com.example.pojo.PageBean;
 import com.example.pojo.Quiz;
 import com.example.service.QuizService;
+import com.example.service.UserLogService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,8 @@ import java.util.List;
 public class TopicController {
     @Autowired
     QuizService quizService;
-
+    @Autowired
+    UserLogService userLogService;
     @RequestMapping("")
     public Result home() {
         List<tmp> tmpList;
@@ -46,12 +51,13 @@ public class TopicController {
         }
         return result;
     }
-//找题
+//找题,做题
     @GetMapping(value = {"/find","/do"})
-    public Result find(@RequestParam int id) {
+    public Result find(@RequestParam int quizid,@RequestParam String username) {
         Result result;
         try {
-            result = quizService.find(id);
+            result = quizService.find(quizid);
+            userLogService.add(username,quizid);
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(String.valueOf(e));
@@ -79,38 +85,12 @@ public class TopicController {
 
 
 }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 class tmp{
     private int id;
     private String title;
     private String description;
-    public tmp(int id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-    }
-    public tmp() {
-    }
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-}

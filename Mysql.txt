@@ -42,7 +42,15 @@ create table top(
     total int not null,
     quizid int not null ,
     CONSTRAINT `fk_top_quizid` FOREIGN KEY(quizid) REFERENCES web.quiz(id)
-)
+);
+create table userlog(
+    id int primary key auto_increment,
+    userid int not null ,
+    quizid int not null ,
+    time datetime not null,
+    CONSTRAINT `fk_userlog_userid` FOREIGN KEY(userid) REFERENCES user(id),
+    CONSTRAINT `fk_userlog_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
+);
 
 DELIMITER $$
 create trigger trigger_insert_top after insert on web.comment for each row
