@@ -35,3 +35,22 @@ create table commemt(
 	CONSTRAINT `fk_comment_userid`  FOREIGN KEY(userid) REFERENCES user(id),
     CONSTRAINT `fk_comment_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 	);
+	DELIMITER $$
+		create trigger trigger_top after insert on web.comment for each row
+		begin
+		declare num int ;
+		declare s float ;
+		declare t int ;
+		set num = (select count(*) from web.top where quizid = new.id);
+		if (num = 0) then
+		 insert into web.top (score,total,quizid) values (new.goal,1,new.quizid);
+		 else
+         begin
+         set s = (select score from web.top where quizid = new.id );
+         set t = (select total from web.top where quizid = new.id);
+         update web.top set score = 
+         end;
+		 end if;
+
+		end;
+	DELIMITER ; 
