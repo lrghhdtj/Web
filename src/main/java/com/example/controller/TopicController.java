@@ -25,6 +25,7 @@ public class TopicController {
     UserLogService userLogService;
     @RequestMapping("")
     public Result home() {
+        //返回评分最高的前5道题
         List<tmp> tmpList;
         try {
             tmpList = new ArrayList<>();
@@ -51,9 +52,21 @@ public class TopicController {
         }
         return result;
     }
-//找题,做题
-    @GetMapping(value = {"/find","/do"})
-    public Result find(@RequestParam int quizid,@RequestParam String username) {
+//找题
+    @GetMapping(value = {"/find"})
+    public Result find(@RequestParam int quizid) {
+        Result result;
+        try {
+            result = quizService.find(quizid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(String.valueOf(e));
+        }
+        return result;
+    }
+    //做题
+    @GetMapping(value = {"/do"})
+    public Result doquiz(@RequestParam int quizid,@RequestParam String username) {
         Result result;
         try {
             result = quizService.find(quizid);

@@ -27,13 +27,13 @@ public class QuizServiceimpl implements QuizService {
     }
     @Override
     public Result get(){
-        List<Quiz> list = quizMapper.get();
+        //List<Quiz> list = quizMapper.get();
         //获取评分最高的5个
-        /*List<Integer> quizList = quizMapper.topfive();
+        List<Integer> quizList = quizMapper.topfive();
         List<Quiz> list = new ArrayList<>();
         for (int i = 0; i < quizList.size(); i++) {
             list.add(quizMapper.find(quizList.get(i)));
-        }*/
+        }
         if (!list.isEmpty()){
             return Result.success(list);
         }else {
