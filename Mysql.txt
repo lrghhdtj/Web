@@ -35,6 +35,10 @@ create table commemt(
 	CONSTRAINT `fk_comment_userid`  FOREIGN KEY(userid) REFERENCES user(id),
     CONSTRAINT `fk_comment_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 	);
+
+
+
+
 	DELIMITER $$
 		create trigger trigger_top after insert on web.comment for each row
 		begin
