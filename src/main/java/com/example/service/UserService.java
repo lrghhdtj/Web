@@ -1,8 +1,9 @@
 package com.example.service;
 
-import com.example.pojo.User;
+import com.example.Utils.Result;
 
 public interface UserService {
-    String login(String usernmae , String password);
-    String register(String usernmae , String password);
+    Result login(String username , String password);
+    Result register(String username , String password);
+    Result change(String username, String oldpassword, String newpassword);
 }

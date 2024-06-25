@@ -28,5 +28,7 @@ public interface QuizMapper {
     @Select("select * from web.quiz limit #{start},#{pageSize}")
     List<Quiz> page(Integer start,Integer pageSize);
 
+    @Select("select quizid from web.top order by score desc limit 5;")
+    List<Integer> topfive();
 }
 

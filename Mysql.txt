@@ -1,0 +1,82 @@
+ create table user(
+    id int primary key auto_increment,
+    username varchar(20) not null ,
+    password varchar(20) not null 
+);
+
+create table quiz(
+    id int primary key auto_increment,
+    title varchar(20),
+    descrition varchar(35),
+    data text,
+    question text,
+    solution text,
+    analysis text,
+    stysle varchar(15)
+);
+
+create table collection(
+    id int primary key auto_increment,
+    userid int not null ,
+    quizid int not null,
+    CONSTRAINT `fk_collection_userid`  FOREIGN KEY(userid) REFERENCES user(id),
+    CONSTRAINT `fk_collection_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
+);
+
+
+create table commemt(
+    id int primary key auto_increment,
+    username varchar(20) not null ,
+    comment text not null ,
+    goal int not null ,
+    createtime datetime not null,
+    userid int not null ,
+    quizid int not null ,
+	CONSTRAINT `fk_comment_userid`  FOREIGN KEY(userid) REFERENCES user(id),
+    CONSTRAINT `fk_comment_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
+	);
+
+create table top(
+    id int primary key auto_increment,
+    score float not null ,
+    total int not null,
+    quizid int not null ,
+    CONSTRAINT `fk_top_quizid` FOREIGN KEY(quizid) REFERENCES web.quiz(id)
+)
+
+DELIMITER $$
+create trigger trigger_insert_top after insert on web.comment for each row
+begin
+    declare t int;
+    declare num int;
+    declare s float;
+    set num = (select count(*) from web.top where top.quizid = NEW.quizid);
+    set t = (select total from web.top where top.quizid = NEW.quizid);
+    if (num = 0) then
+        insert into web.top (score,total,quizid) values (NEW.goal,1,NEW.quizid);
+    else
+        set s = (select top.score from web.top where top.quizid = NEW.quizid);
+        update web.top set score = ( s * t + NEW.goal)/(t+1) ,
+                           total = (t + 1) where top.quizid = NEW.quizid;
+    end if;
+end;
+DELIMITER ;
+
+
+DELIMITER $$
+create trigger trigger_delete_top after delete on web.comment for each row
+begin
+    declare num int ;
+    declare t int;
+    declare s float;
+    set num = (select count(*) from web.top where quizid = OLD.quizid);
+    if (num > 0) then
+        begin
+        set t = (select top.total from web.top where top.quizid = OLD.quizid);
+        set s = (select top.score from web.top where top.quizid = OLD.quizid);
+        update web.top set score = (s * t - OLD.goal)/(t-1) ,
+                           total = (t - 1) where quizid = OLD.quizid;
+        end;
+    end if;
+end;
+DELIMITER ;
