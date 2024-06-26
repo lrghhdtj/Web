@@ -29,7 +29,7 @@ public class TopicController {
         List<tmp> tmpList;
         try {
             tmpList = new ArrayList<>();
-            List<Quiz> list = (List<Quiz>) quizService.get().getData();
+            List<Quiz> list = (List<Quiz>) quizService.top().getData();
             for (int i = list.size()-1; i >= 0; i--) {
                 tmp tmp = new tmp(list.get(i).getId(),list.get(i).getTitle(),list.get(i).getDescription());
                 tmpList.add(tmp);

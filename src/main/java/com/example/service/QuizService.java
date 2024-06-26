@@ -4,6 +4,7 @@ import com.example.Utils.Result;
 import com.example.pojo.PageBean;
 import com.example.pojo.Quiz;
 
+import java.awt.color.ICC_Profile;
 import java.util.List;
 
 public interface QuizService {
@@ -11,4 +12,6 @@ public interface QuizService {
     Result get();
     PageBean page(Integer page, Integer pageSize);
     List<Quiz> findByStyle(String style);
+
+    Result top();
 }

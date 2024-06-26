@@ -27,13 +27,7 @@ public class QuizServiceimpl implements QuizService {
     }
     @Override
     public Result get(){
-        //List<Quiz> list = quizMapper.get();
-        //获取评分最高的5个
-        List<Integer> quizList = quizMapper.top();
-        List<Quiz> list = new ArrayList<>();
-        for (int i = 0; i < quizList.size(); i++) {
-            list.add(quizMapper.find(quizList.get(i)));
-        }
+        List<Quiz> list = quizMapper.get();
         if (!list.isEmpty()){
             return Result.success(list);
         }else {
@@ -52,6 +46,21 @@ public class QuizServiceimpl implements QuizService {
     @Override
     public List<Quiz> findByStyle(String style) {
         return quizMapper.findByStyle(style);
+    }
+
+    @Override
+    public Result top() {
+        //获取评分最高的5个
+        List<Integer> quizList = quizMapper.top();
+        List<Quiz> list = new ArrayList<>();
+        for (int i = 0; i < quizList.size(); i++) {
+            list.add(quizMapper.find(quizList.get(i)));
+        }
+        if (!list.isEmpty()){
+            return Result.success(list);
+        }else {
+            return Result.error("没有找到题目!");
+        }
     }
 
 }
