@@ -29,7 +29,7 @@ public class QuizServiceimpl implements QuizService {
     public Result get(){
         //List<Quiz> list = quizMapper.get();
         //获取评分最高的5个
-        List<Integer> quizList = quizMapper.topfive();
+        List<Integer> quizList = quizMapper.top();
         List<Quiz> list = new ArrayList<>();
         for (int i = 0; i < quizList.size(); i++) {
             list.add(quizMapper.find(quizList.get(i)));
@@ -47,6 +47,11 @@ public class QuizServiceimpl implements QuizService {
         List<Quiz> empList = quizMapper.page(startIndex, pageSize);
         PageBean pageBean = new PageBean(count, empList);
         return pageBean;
+    }
+
+    @Override
+    public List<Quiz> findByStyle(String style) {
+        return quizMapper.findByStyle(style);
     }
 
 }

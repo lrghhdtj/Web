@@ -23,32 +23,20 @@ public class ExamController {
     UserLogService userLogService;
     @GetMapping("/test")
     public Result doexam(@RequestParam String username) {
-        List<Quiz> list;
+        List<Quiz> r;
+        List<Quiz> f;
+        List<Quiz> t;
+        List<Quiz> w;
         try {
-            list = ((List<Quiz>) quizService.get().getData());
+            r = quizService.findByStyle("reading");
+            f = quizService.findByStyle("filling");
+            t = quizService.findByStyle("translation");
+            w = quizService.findByStyle("writing");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error(e.getMessage());
         }
-        List<Quiz> r = new ArrayList<>();
-        List<Quiz> f = new ArrayList<>();
-        List<Quiz> t = new ArrayList<>();
-        List<Quiz> w = new ArrayList<>();
         List<Quiz> paper = new ArrayList<>();
-        for (Quiz quiz : list) {
-            if (quiz.getStyle().equals("r")) {
-                r.add(quiz);
-            }
-            if (quiz.getStyle().equals("f")) {
-                f.add(quiz);
-            }
-            if (quiz.getStyle().equals("t")) {
-                t.add(quiz);
-            }
-            if (quiz.getStyle().equals("w")) {
-                w.add(quiz);
-            }
-        }
         Collections.shuffle(r);
         Collections.shuffle(f);
         Collections.shuffle(t);
@@ -57,11 +45,11 @@ public class ExamController {
             paper.add(r.get(i));
         }
         paper.add(f.get(1));
-        userLogService.add(username,f.get(1).getId());
+        userLogService.add(username, f.get(1).getId());
         paper.add(t.get(1));
-        userLogService.add(username,t.get(1).getId());
+        userLogService.add(username, t.get(1).getId());
         paper.add(w.get(1));
-        userLogService.add(username,w.get(1).getId());
+        userLogService.add(username, w.get(1).getId());
         return Result.success(paper);
     }
 

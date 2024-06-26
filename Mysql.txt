@@ -1,20 +1,21 @@
+ #用户表
  create table user(
     id int primary key auto_increment,
     username varchar(20) not null ,
     password varchar(20) not null 
 );
-
+#题库表
 create table quiz(
     id int primary key auto_increment,
     title varchar(20),
-    descrition varchar(35),
+    description varchar(35),
     data text,
     question text,
     solution text,
     analysis text,
-    stysle varchar(15)
+    style varchar(15)
 );
-
+#收藏表
 create table collection(
     id int primary key auto_increment,
     userid int not null ,
@@ -23,8 +24,8 @@ create table collection(
     CONSTRAINT `fk_collection_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 );
 
-
-create table commemt(
+#评论表
+create table comment(
     id int primary key auto_increment,
     username varchar(20) not null ,
     comment text not null ,
@@ -35,7 +36,7 @@ create table commemt(
 	CONSTRAINT `fk_comment_userid`  FOREIGN KEY(userid) REFERENCES user(id),
     CONSTRAINT `fk_comment_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 	);
-
+#题目评分表
 create table top(
     id int primary key auto_increment,
     score float not null ,
@@ -43,6 +44,7 @@ create table top(
     quizid int not null ,
     CONSTRAINT `fk_top_quizid` FOREIGN KEY(quizid) REFERENCES web.quiz(id)
 );
+#用户浏览日志表
 create table userlog(
     id int primary key auto_increment,
     userid int not null ,
@@ -51,7 +53,7 @@ create table userlog(
     CONSTRAINT `fk_userlog_userid` FOREIGN KEY(userid) REFERENCES user(id),
     CONSTRAINT `fk_userlog_quizid` FOREIGN KEY(quizid) REFERENCES quiz(id)
 );
-
+#新增评论触发器
 DELIMITER $$
 create trigger trigger_insert_top after insert on web.comment for each row
 begin
@@ -70,7 +72,7 @@ begin
 end;
 DELIMITER ;
 
-
+#删除评论触发器
 DELIMITER $$
 create trigger trigger_delete_top after delete on web.comment for each row
 begin
