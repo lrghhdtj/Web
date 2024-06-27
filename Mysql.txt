@@ -47,6 +47,7 @@ create table top(
 #用户浏览日志表
 create table userlog(
     id int primary key auto_increment,
+    title varchar(20),
     userid int not null ,
     quizid int not null ,
     time datetime not null,
