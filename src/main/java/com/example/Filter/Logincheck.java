@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-//@Component
+@Component
 @Slf4j
 @WebFilter(filterName = "checklogin", urlPatterns = "/*")
 public class Logincheck implements Filter {
@@ -23,7 +23,7 @@ public class Logincheck implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String url = request.getRequestURI().toString();
-        if (url.contains("/login")){
+        if (url.contains("/login")||url.contains("/register")){
             chain.doFilter(request,response);
             return;
         }

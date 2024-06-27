@@ -42,9 +42,9 @@ public class UserServiceimpl implements UserService {
         User u = userMapper.getUser(username);
         if (u == null){
             userMapper.insertuser(username ,password);
-             return Result.success("");
+             return Result.success("注册成功！");
         }else {
-            return Result.error("");
+            return Result.error("用户已存在！");
         }
     }
 
