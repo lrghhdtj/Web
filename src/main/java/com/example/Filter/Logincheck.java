@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -25,15 +26,17 @@ public class Logincheck implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String url = request.getRequestURI().toString();
 
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            return;
-        }
         if (url.contains("/login")||url.contains("/register")){
             chain.doFilter(request,response);
             return;
         }
-        String jwt = request.getHeader("token");
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            System.out.println("Options");
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+        String jwt = request.getHeader("Authorization");
+        System.out.println("jwt:"+jwt);
         if (!StringUtils.hasLength(jwt)){
             Result error = Result.error("NoLogin!");
             String nologin = JSONObject.toJSONString(error);

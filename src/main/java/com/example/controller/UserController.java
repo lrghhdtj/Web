@@ -18,12 +18,13 @@ public class UserController {
     @Autowired
     UserService userService;
     @PostMapping("/login")
-    //public Result login(@RequestParam String username ,@RequestParam  String password ){
     public Result login(@RequestBody User user ){
+        System.out.println(user);
         return userService.login(user.getUsername(), user.getPassword());
     }
     @PostMapping("/register")
     public Result register(@RequestBody User user ){
+        System.out.println(user);
         return userService.register(user.getUsername(), user.getPassword());
     }
 
