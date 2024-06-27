@@ -1,7 +1,9 @@
 package com.example.config;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
@@ -17,3 +19,22 @@ public class CorsConfiguration implements WebMvcConfigurer{
             }
 }
 
+/*
+@Configuration
+public class CorsConfiguration {
+    @Bean
+    public FilterRegistrationBeans<CorsFilter>corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addALlowedoriginPattern("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source
+        new UrlBasedCorsConfigurationSource;
+        source.registerCorsConfiguration(pattem:"/**", conf19)
+        CorsFilter corsFilter = new CorsFilter(source);
+        FilterRegistrationBeanCorsFilter > registrationBean = new FilterRegistrationBean<>(corsFilter);
+        reg1strationBean.setOrder（Ordered.HIGHEST_PRECEDENCE）：1 / 确保 CorsF1lter的优先级最高
+        return registrationBean;
+    }
+}*/

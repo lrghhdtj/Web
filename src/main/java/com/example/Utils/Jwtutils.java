@@ -46,7 +46,7 @@ public class Jwtutils {
     public static String getuseridbyJwtToken(HttpServletRequest request) {
         String jwtToken = request.getHeader("token");
         if(StringUtils.isEmpty(jwtToken)) {
-            return "";
+            return "令牌为空！";
         }
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(signKey).parseClaimsJws(jwtToken);
         Claims claims = claimsJws.getBody();
