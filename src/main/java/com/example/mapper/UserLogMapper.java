@@ -19,8 +19,8 @@ public interface UserLogMapper {
     @Delete("delete from userlog where userid = #{userid} and id = #{id}")
     void delete(int userid, int id);
 
-    @Insert("insert into userlog (userid,quizid,time) values (#{userid},#{quizid},#{time})")
-    void add(int userid, int quizid, Date time);
+    @Insert("insert into userlog (title,userid,quizid,time) values (#{title},#{userid},#{quizid},#{time})")
+    void add(String title,int userid, int quizid, Date time);
 
     @Delete("delete from userlog where userid = #{userid}")
     void clear(int userid);

@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.Utils.Result;
+import com.example.mapper.QuizMapper;
 import com.example.mapper.UserLogMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.UserLogService;
@@ -16,6 +17,8 @@ public class UserLogServiceimpl implements UserLogService {
     UserLogMapper userLogMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    QuizMapper quizMapper;
     int userid;
 
     @Override
@@ -40,7 +43,8 @@ public class UserLogServiceimpl implements UserLogService {
     @Override
     public void add(String username,int quizid){
         userid = userMapper.getUserid(username);
+        String title =  quizMapper.find(quizid).getTitle();
         Date time = new Date();
-        userLogMapper.add(userid,quizid,new Timestamp(time.getTime()));
+        userLogMapper.add(title, userid,quizid,new Timestamp(time.getTime()));
     }
 }

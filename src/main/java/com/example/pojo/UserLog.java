@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserLog {
     private int id;
+    private String title;
     private int userid;
     private int quizid;
     private Date time;
